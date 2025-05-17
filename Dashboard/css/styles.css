@@ -1,0 +1,358 @@
+:root {
+  /* Color system */
+  --primary-color: #4361ee;
+  --secondary-color: #3f37c9;
+  --accent-color: #4cc9f0;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  
+  /* Neutral tones */
+  --background-color: #f8f9fa;
+  --card-background: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border-color: #e9ecef;
+  
+  /* Temperature colors */
+  --cold-color: #4cc9f0;
+  --mild-color: #52b788;
+  --warm-color: #fb8500;
+  --hot-color: #dc2f02;
+  
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  
+  /* Border radius */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions */
+  --transition-normal: all 0.3s ease;
+  --transition-fast: all 0.15s ease;
+}
+
+/* Dark theme variables */
+.dark-theme {
+  --background-color: #121212;
+  --card-background: #1e1e1e;
+  --text-primary: #f8f9fa;
+  --text-secondary: #adb5bd;
+  --border-color: #333333;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  line-height: 1.5;
+  transition: var(--transition-normal);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styles */
+header {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 600;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#theme-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-background);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+#theme-button:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Main Content */
+main {
+  flex-grow: 1;
+}
+
+/* Temperature Display Cards */
+.temperature-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.temp-card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.temp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.temp-card h2 {
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-md);
+  font-weight: 500;
+}
+
+.temp-value {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+  transition: var(--transition-normal);
+}
+
+/* Temperature Gauges */
+.temp-gauge {
+  height: 16px;
+  position: relative;
+  margin-bottom: var(--spacing-md);
+  background-color: var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gauge-track {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.gauge-fill {
+  height: 100%;
+  width: 0%;
+  position: absolute;
+  transition: width 1s ease-in-out, background-color 1s ease-in-out;
+  border-radius: 8px;
+}
+
+.gauge-marker {
+  position: absolute;
+  height: 24px;
+  width: 4px;
+  background-color: var(--text-primary);
+  top: -4px;
+  transition: left 1s ease-in-out;
+}
+
+.last-updated {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.prediction-accuracy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Temperature History */
+.temperature-history {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.temperature-history h2 {
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-md);
+  font-weight: 500;
+}
+
+.history-container {
+  height: 300px;
+  width: 100%;
+  position: relative;
+}
+
+/* Data Stats */
+.data-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.stat-card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: var(--transition-normal);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card h3 {
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: var(--spacing-md) 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: white;
+}
+
+.loader {
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 5px solid var(--primary-color);
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--spacing-md);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Animation for temperature value changes */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 0.5s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .temp-value {
+    font-size: 2.5rem;
+  }
+  
+  .history-container {
+    height: 250px;
+  }
+  
+  .data-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--spacing-sm);
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .temperature-display {
+    grid-template-columns: 1fr;
+  }
+  
+  .data-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .history-container {
+    height: 200px;
+  }
+}

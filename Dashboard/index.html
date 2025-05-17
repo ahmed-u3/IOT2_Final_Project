@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Temperature Monitor</h1>
+      <p class="subtitle">Real-time temperature tracking & prediction</p>
+      <div class="theme-toggle">
+        <button id="theme-button"><span id="theme-icon">🌙</span></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="temperature-display">
+        <div class="temp-card current">
+          <h2>Current Temperature</h2>
+          <div class="temp-value" id="current-temp">--°C</div>
+          <div class="temp-gauge">
+            <div class="gauge-track"></div>
+            <div class="gauge-fill" id="current-gauge"></div>
+            <div class="gauge-marker" id="current-marker"></div>
+          </div>
+          <div class="last-updated">Last updated: <span id="last-updated-time">--:--</span></div>
+        </div>
+        
+        <div class="temp-card prediction">
+          <h2>Predicted Temperature</h2>
+          <div class="temp-value" id="predicted-temp">--°C</div>
+          <div class="temp-gauge">
+            <div class="gauge-track"></div>
+            <div class="gauge-fill" id="prediction-gauge"></div>
+            <div class="gauge-marker" id="prediction-marker"></div>
+          </div>
+          <div class="prediction-accuracy">
+            <div class="accuracy-label">Prediction accuracy</div>
+            <div class="accuracy-value" id="prediction-accuracy">--</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="temperature-history">
+        <h2>Temperature History</h2>
+        <div class="history-container">
+          <canvas id="temp-chart"></canvas>
+        </div>
+      </section>
+
+      <section class="data-stats">
+        <div class="stat-card">
+          <h3>Min Temperature</h3>
+          <div class="stat-value" id="min-temp">--°C</div>
+        </div>
+        <div class="stat-card">
+          <h3>Max Temperature</h3>
+          <div class="stat-value" id="max-temp">--°C</div>
+        </div>
+        <div class="stat-card">
+          <h3>Avg Temperature</h3>
+          <div class="stat-value" id="avg-temp">--°C</div>
+        </div>
+        <div class="stat-card">
+          <h3>Prediction Diff</h3>
+          <div class="stat-value" id="pred-diff">--°C</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 Temperature Monitor Dashboard | Powered by Firebase & ESP32</p>
+    </footer>
+  </div>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="loader"></div>
+    <p>Connecting to Firebase...</p>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
